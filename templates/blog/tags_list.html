@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Etiketler - {{ block.super }}{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+
+            <div class="page-title lb single-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h2><i class="fa fa-star bg-orange"></i> #Etiketler <small class="hidden-xs-down hidden-sm-down">ile bağlantılı haberler. </small></h2>
+                        </div><!-- end col -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'tags_list_url' %}">Etiketler</a></li>
+                                <li class="breadcrumb-item active">#etiketler</li>
+                            </ol>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </div><!-- end page-title -->
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="page-wrapper">
+                                <div class="blog-list clearfix">
+                                    {% for tag in tags_list %}
+                                    <div class="blog-box row">
+                                        <div class="blog-meta big-meta col-md-8">
+                                            <small class="firstsmall"><a class="bg-orange" href="{% url 'tag_detail_url' tag.slug %}" title="{{tag.name}}">{{tag.name}}</a></small>
+                                            <small><a href="{% url 'tag_detail_url' tag.slug %}" title="{{tag.slug}}">{{tag.slug}}</a></small></div><!-- end meta -->
+                                    </div><!-- end blog-box -->
+                                    <hr class="invis">
+                                    {% endfor %}
+
+                                    <div class="row">
+                                        <div class="col-lg-10 offset-lg-1">
+                                            <div class="banner-spot clearfix">
+                                                <div class="banner-img">
+                                                    <img src="{% static 'upload/banner_02.jpg' %}" alt="" class="img-fluid">
+                                                </div><!-- end banner-img -->
+                                            </div><!-- end banner -->
+                                        </div><!-- end col -->
+                                    </div><!-- end row -->
+                                </div><!-- end blog-list -->
+                            </div><!-- end page-wrapper -->
+
+                            <hr class="invis">
+                            {% include 'includes/pagination.html' %}
+                        </div><!-- end col -->
+            <!-- SIDEBAR Başlangıç -->
+                        {% include 'includes/sidebar.html' %}
+            <!-- SIDE BAR Bitiş -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </section>
+
+{% endblock content %}

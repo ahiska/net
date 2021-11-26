@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ article.title }} - {{ block.super }}
+{% endblock title %}
+
+{% load static %}
+
+{% load hitcount_tags %}
+
+{% block content %}
+
+        <section class="section single-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area text-left">
+                                <ol class="breadcrumb hidden-xs-down">
+                                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'blog' %}">Haberler</a></li>
+                                    <li class="breadcrumb-item active">{{article.title}}</li>
+                                </ol>
+                                <span class="color-orange"><a href="{% url 'list_by_category' article.category.slug%}" title="{{article.category}}">{{article.category}}</a></span>
+                                <h3>{{article.title}}</h3>
+
+                                <div class="blog-meta big-meta">
+                                    <small><a href="{% url 'user_articles' article.author%}" title="{{article.author.get_full_name}}">{{article.author.get_full_name}}</a></small>
+                                    <small>{{article.created}}</small>
+                                    <small><i class="fa fa-eye"></i> {% get_hit_count for article %}</small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Facebook'ta Paylaş</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Twitter'da Paylaş</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i> <span class="down-mobile">Google'da Paylaş</span></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="single-post-media">
+                                <img src="{{article.image.url}}" alt="{{article.title}}" class="img-fluid">
+                            </div><!-- end media -->
+
+                            <div class="blog-content">
+                                <div class="pp">
+                                    <h3><strong>{{article.description}}</strong></h3>
+                                </div><!-- end pp -->  
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1">
+                                        <div class="banner-spot clearfix">
+                                            <div class="banner-img">
+                                                <img src="{% static 'upload/banner_02.jpg' %}" alt="" class="img-fluid">
+                                            </div><!-- end banner-img -->
+                                        </div><!-- end banner -->
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                                <hr class="invis">
+                                <div class="pp">
+                                    <p>{{ article.content|safe }}</p>
+                                </div><!-- end pp -->
+                            </div><!-- end content -->
+
+                            <div class="blog-title-area">
+                                <div class="tag-cloud-single">
+                                    <span><a href="{% url 'tags_list_url' %}" title="">Etiket</a></span>
+                                    {% for tag in article.tags.all %}
+                                    <small><a href="{% url 'tag_detail_url' tag.slug %}" title="{{ tag.name }}">{{ tag.name }}</a></small>
+                                    {% endfor %}
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Facebook'ta Paylaş</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Twitter'da Paylaş</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i> <span class="down-mobile">Google'da Paylaş</span></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            <img src="{% static 'upload/banner_01.jpg' %}" alt="" class="img-fluid">
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+
+                            <hr class="invis1">
+
+                            {% include 'includes/article_author.html' %}
+
+                            <hr class="invis1">
+
+                            {% include 'includes/article_prev_next.html' %}
+
+                            <hr class="invis1">
+
+                            {% include 'includes/article_you_may_also_like.html' %}
+
+                            <hr class="invis1">
+
+                            {% include 'includes/article_comments.html' %}
+
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+<!-- SIDEBAR Başlangıç -->
+                    {% include 'includes/sidebar.html' %}
+<!-- SIDE BAR Bitiş -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+{% endblock content %}

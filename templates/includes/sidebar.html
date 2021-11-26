@@ -1,0 +1,119 @@
+{% load static %}
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget">
+                                <h2 class="widget-title">Bizi Takip Edin</h2>
+
+                                <div class="row text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="https://www.facebook.com/ahiskalilar" class="social-button facebook-button">
+                                            <i class="fa fa-facebook"></i>
+                                            <p>AH</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="https://twitter.com/ahiska" class="social-button twitter-button">
+                                            <i class="fa fa-twitter"></i>
+                                            <p>IS</p>
+                                        </a>
+                                    </div>
+
+<!--                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">-->
+<!--                                        <a href="#" class="social-button google-button">-->
+<!--                                            <i class="fa fa-google-plus"></i>-->
+<!--                                            <p>27K</p>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="https://www.youtube.com/AHISKATV" class="social-button youtube-button">
+                                            <i class="fa fa-youtube"></i>
+                                            <p>KA</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Trend Haberler</h2>
+                                <div class="trend-videos">
+                                    {% for featured in featured_list %}
+                                    <div class="blog-box">
+                                        <div class="post-media">
+                                            <a href="{{ featured.get_absolute_url }}" title="">
+                                                <img src="{{ featured.image.url }}" alt="{{ featured.title }}" class="img-fluid">
+<!--                                                <div class="hovereffect">-->
+<!--                                                    <span class="videohover"></span>-->
+<!--                                                </div>&lt;!&ndash; end hover &ndash;&gt;-->
+                                            </a>
+                                        </div><!-- end media -->
+                                        <div class="blog-meta">
+                                            <h4><a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}">{{ featured.title }}</a></h4>
+                                        </div><!-- end meta -->
+                                    </div><!-- end blog-box -->
+
+                                    <hr class="invis">
+                                    {% endfor %}
+                                </div><!-- end videos -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">En Son Haberler</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        {% for latest in latest_list %}
+                                        <a href="{{ latest.get_absolute_url }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{{ latest.image.url }}" alt="{{ latest.title }}" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{ latest.title|truncatechars:40}}</h5>
+                                                <small class="float-right">{{ latest.created|date }}</small>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">En Son Yorumlar</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        {% for comment in article.comments.all|slice:":3" %}
+                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{% static 'upload/default.jpg' %}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{ comment.body|truncatechars:40 }}</h5>
+                                                <small class="float-right">{{ comment.name }}</small>
+<!--                                                <span class="rating">-->
+<!--                                                    <i class="fa fa-star"></i>-->
+<!--                                                    <i class="fa fa-star"></i>-->
+<!--                                                    <i class="fa fa-star"></i>-->
+<!--                                                    <i class="fa fa-star"></i>-->
+<!--                                                    <i class="fa fa-star"></i>-->
+<!--                                                </span>-->
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="{% static 'upload/banner_03.jpg' %}" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="{% static 'upload/banner_07.jpg' %}" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->

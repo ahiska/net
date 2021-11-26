@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} - Üye Paneli{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+
+                        Merhaba, {{ user.get_full_name|default:'Misafir' }}!
+                        <div>
+                            <br>
+                            <hr>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'password_change' %}">Şifre Değiştir</a><br>
+                                <a href="{% url 'logout' %}">Çıkış Yap</a>
+                            {% else %}
+                                <a href="{% url 'register' %}">Kayıt Ol</a><br>
+                                <a href="{% url 'login' %}">Giriş Yap</a>
+                            {% endif %}
+                            <hr>
+                        </div>
+
+                </div><!-- end page-wrapper -->
+            </div><!-- end col -->
+<!-- SIDEBAR Başlangıç -->
+            {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+<!-- SIDE BAR Bitiş -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+{% endblock content %}

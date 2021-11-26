@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ category.name }} - {{ block.super }}
+{% endblock title %}
+
+{% load static %}
+
+{% load hitcount_tags %}
+
+{% block content %}
+
+            <div class="page-title lb single-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h2><i class="fa fa-star bg-orange"></i> {{ category.name }} <small class="hidden-xs-down hidden-sm-down">kategorisine ait haberler.</small></h2>
+                        </div><!-- end col -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'blog' %}">Haberler</a></li>
+                                <li class="breadcrumb-item active">{{ category.slug }}</li>
+                            </ol>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </div><!-- end page-title -->
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="page-wrapper">
+                                <div class="blog-list clearfix">
+                                    {% for post in category_posts %}
+                                    <div class="blog-box row">
+                                        <div class="col-md-4">
+                                            <div class="post-media">
+                                                <a href="{{ post.get_absolute_url }}" title="{{post.title}}">
+                                                    <img src="{{post.image.url}}" alt="{{post.title}}" class="img-fluid">
+                                                    <div class="hovereffect"></div>
+                                                </a>
+                                            </div><!-- end media -->
+                                        </div><!-- end col -->
+            
+                                        <div class="blog-meta big-meta col-md-8">
+                                            <h4><a href="{{ post.get_absolute_url }}" title="{{post.title}}">{{post.title}}</a></h4>
+                                            <p>{{post.description }}</p>
+                                            <small class="firstsmall"><a class="bg-orange" href="{% url 'list_by_category' post.category.slug%}" title="{{post.category}}">{{post.category}}</a></small>
+                                            <small>{{post.created}}</small>
+                                            <small><a href="{% url 'user_articles' post.author%}" title="{{post.author}}">{{post.author.get_full_name}}</a></small>
+                                            <small><i class="fa fa-eye"></i> {% get_hit_count for post %}</small>
+                                        </div><!-- end meta -->
+                                    </div><!-- end blog-box -->
+                                    <hr class="invis">
+                                    {% endfor %}
+
+                                    <div class="row">
+                                        <div class="col-lg-10 offset-lg-1">
+                                            <div class="banner-spot clearfix">
+                                                <div class="banner-img">
+                                                    <img src="{% static 'upload/banner_02.jpg' %}" alt="" class="img-fluid">
+                                                </div><!-- end banner-img -->
+                                            </div><!-- end banner -->
+                                        </div><!-- end col -->
+                                    </div><!-- end row -->
+                                </div><!-- end blog-list -->
+                            </div><!-- end page-wrapper -->
+            
+                            <hr class="invis">
+                            {% include 'includes/pagination.html' %}
+                        </div><!-- end col -->
+            <!-- SIDEBAR Başlangıç -->
+                        {% include 'includes/sidebar.html' %}
+            <!-- SIDE BAR Bitiş -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </section>
+
+{% endblock content %}

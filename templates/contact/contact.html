@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    İletişim - {{ block.super }}
+{% endblock title %}
+
+{% load static %}
+
+{% load hitcount_tags %}
+
+{% block content %}
+
+        {% if messages %}
+        <div class="page-title lb">
+        {% else %}
+            <div class="page-title lb single-wrapper">
+        {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <h2><i class="fa fa-envelope-open-o bg-orange"></i> İletişim <small class="hidden-xs-down hidden-sm-down">Bizimle doğrudan iletişim kurmak için lütfen aşağıdaki formu kullanınız. </small></h2>
+                    </div><!-- end col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item active">İletişim</li>
+                        </ol>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end page-title -->
+
+        <section class="section wb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <h4>Who we are</h4>
+                                    <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+
+                                    <h4>How we help?</h4>
+                                    <p>Etiam vulputate urna id libero auctor maximus. Nulla dignissim ligula diam, in sollicitudin ligula congue quis turpis dui urna nibhs. </p>
+
+                                    <h4>Pre-Sale Question</h4>
+                                    <p>Fusce dapibus nunc quis quam tempor vestibulum sit amet consequat enim. Pellentesque blandit hendrerit placerat. Integertis non.</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <form method="POST" class="form-wrapper control-form">
+                                        {% csrf_token %}
+                                        <input name="name" type="text" class="form-control" placeholder="Ad Soyad">
+                                        <input name="email" type="email" class="form-control" placeholder="E-Posta">
+                                        <input name="phone" type="number" class="form-control" placeholder="Telefon">
+                                        <input name="subject" type="text" class="form-control" placeholder="Konu">
+                                        <textarea name="message" class="form-control" placeholder="Mesaj"></textarea>
+                                        <button type="submit" class="btn btn-primary">Gönder <i class="fa fa-envelope-open-o"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+{% endblock content %}

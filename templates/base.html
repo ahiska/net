@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}AHISKA.NET - Ahıska Türklerinin Sesi...{% endblock title %}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/colors.css' %}" rel="stylesheet">
+    <link href="{% static 'css/version/tech.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="wrapper">
+
+      {% include 'header.html' %}
+
+        {% include 'messages.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+      {% include 'footer.html' %}
+
+  </div><!-- end wrapper -->
+
+    {% include 'scripts.html' %}
+</body>
+</html>

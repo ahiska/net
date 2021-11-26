@@ -1,0 +1,33 @@
+<!-- MANŞET -->
+<section class="section first-section">
+    <div class="container-fluid">
+        <div class="masonry-blog clearfix">
+            {% for featured in featured_list %}
+                {% if forloop.first %}
+                <div class="first-slot">
+                {% endif %}
+                {% if not forloop.first and not forloop.last %}
+                <div class="second-slot">
+                {% endif %}
+                {% if forloop.last %}
+                    <div class="last-slot">
+                {% endif %}
+                <div class="masonry-box post-media">
+                    <img src="{{ featured.image.url }}" alt="" class="img-fluid">
+                     <div class="shadoweffect">
+                        <div class="shadow-desc">
+                            <div class="blog-meta">
+                                <span class="bg-orange"><a href="{% url 'list_by_category' featured.category.slug%}" title="">{{ featured.category}}</a></span>
+                                <h4><a href="{{ featured.get_absolute_url }}" title="">{{ featured.title }}</a></h4>
+                                <small>{{ featured.created }}</small>
+                                <small><a href="{% url 'user_articles' featured.author%}" title="">{{ featured.author.get_full_name }}</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end shadow-desc -->
+                    </div><!-- end shadow -->
+                </div><!-- end post-media -->
+                </div><!-- end first-side -->
+            {% endfor %}
+        </div><!-- end masonry -->
+    </div>
+</section>
+<!-- MANŞET BİTİŞ -->

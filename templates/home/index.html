@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }}{% endblock title %}
+
+{% load static %}
+
+{% load hitcount_tags %}
+
+{% block content %}
+
+{% include 'includes/manset.html' %}
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="blog-top clearfix">
+                        <h4 class="pull-left">Haberler <a href="#"><i class="fa fa-rss"></i></a></h4>
+                    </div><!-- end blog-top -->
+                    <div class="blog-list clearfix">
+                        {% for article in object_list %}
+                        <div class="blog-box row">
+                            <div class="col-md-4">
+                                <div class="post-media">
+                                    <a href="{{ article.get_absolute_url }}" title="{{article.title}}">
+                                        <img src="{{article.image.url}}" alt="{{article.title}}" class="img-fluid">
+                                        <div class="hovereffect"></div>
+                                    </a>
+                                </div><!-- end media -->
+                            </div><!-- end col -->
+
+                            <div class="blog-meta big-meta col-md-8">
+                                <h5><a href="{{ article.get_absolute_url }}" title="{{article.title}}">{{article.title}}</a></h5>
+                                <p>{{article.description }}</p>
+                                <small class="firstsmall"><a class="bg-orange" href="{% url 'list_by_category' article.category.slug%}" title="{{article.category}}">{{article.category}}</a></small>
+                                <small>{{article.created}}</small>
+                                <small><a href="{% url 'user_articles' article.author%}" title="{{article.author}}">{{article.author.get_full_name}}</a></small>
+                                <small><i class="fa fa-eye"></i> {% get_hit_count for article %}</small>
+                            </div><!-- end meta -->
+                        </div><!-- end blog-box -->
+                        <hr class="invis">
+                        {% endfor %}
+
+                        <div class="row">
+                            <div class="col-lg-10 offset-lg-1">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="{% static 'upload/banner_02.jpg' %}" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div><!-- end blog-list -->
+                </div><!-- end page-wrapper -->
+
+                <hr class="invis">
+                {% include 'includes/pagination.html' %}
+            </div><!-- end col -->
+<!-- SIDEBAR Başlangıç -->
+            {% include 'includes/sidebar.html' %}
+<!-- SIDE BAR Bitiş -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+{% endblock content %}
